@@ -3,6 +3,7 @@ package com.example.mybackendspringboot.entity;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Setter
 @EqualsAndHashCode
+@ToString
 public class Priority {
     private Long id;
     private String title;
@@ -34,6 +36,5 @@ public class Priority {
     public String getColor() {
         return color;
     }
-
 
 }
