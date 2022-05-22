@@ -1,5 +1,4 @@
 package com.example.mybackendspringboot.entity;
-
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,6 +45,7 @@ public class Task {
     public Date getDate() {
         return date;
     }
+
 
     @ManyToOne
     @JoinColumn(name = "priority_id", referencedColumnName = "id")

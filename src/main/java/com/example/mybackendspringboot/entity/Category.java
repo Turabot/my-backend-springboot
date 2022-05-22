@@ -18,8 +18,6 @@ public class Category {
     private Long completedCount;
     private Long uncompletedCount;
 
-    // указываем, что поле заполняется в БД
-    // нужно, когда добавляем новый объект и он возвращается уже с новым id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
