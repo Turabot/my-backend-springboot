@@ -23,5 +23,4 @@ public class Category {
     @Basic
     @Column(name = "uncompleted_count")
     private Long uncompletedCount;
-
 }

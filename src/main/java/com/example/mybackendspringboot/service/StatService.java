@@ -1,6 +1,7 @@
 package com.example.mybackendspringboot.service;
 
 import com.example.mybackendspringboot.entity.Stat;
+import com.example.mybackendspringboot.exception.StatNotFoundException;
 import com.example.mybackendspringboot.repo.StatRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,6 @@ public class StatService {
     }
 
     public Stat findById(Long id){
-        return repository.findById(id).get();
+        return repository.findById(id).orElseThrow(StatNotFoundException::new);
     }
 }

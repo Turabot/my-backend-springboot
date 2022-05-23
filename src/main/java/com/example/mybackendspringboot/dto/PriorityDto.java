@@ -7,6 +7,7 @@ import lombok.Value;
 @Builder
 public class PriorityDto {
 
+    Long id;
     String title;
     String color;
 }

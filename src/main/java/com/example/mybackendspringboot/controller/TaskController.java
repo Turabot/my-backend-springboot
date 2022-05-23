@@ -3,16 +3,13 @@ package com.example.mybackendspringboot.controller;
 import com.example.mybackendspringboot.dto.TaskRequestDto;
 import com.example.mybackendspringboot.entity.Task;
 import com.example.mybackendspringboot.service.TaskService;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/task")
@@ -31,60 +28,23 @@ public class TaskController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Task> add(@RequestBody Task task) {
-
-        if (task.getId() != null && task.getId() != 0) {
-
-            return new ResponseEntity("redundant param: id MUST be null", HttpStatus.NOT_ACCEPTABLE);
-        }
-
-        if (task.getTitle() == null || task.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
-        }
-
-        return ResponseEntity.ok(taskService.add(task));
-
+    public ResponseEntity<Task> add(@RequestBody TaskRequestDto taskRequestDto) {
+        return ResponseEntity.ok(taskService.add(taskRequestDto));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Task> update(@RequestBody Task task) {
-
-        if (task.getId() == null || task.getId() == 0) {
-            return new ResponseEntity("missed param: id", HttpStatus.NOT_ACCEPTABLE);
-        }
-
-        if (task.getTitle() == null || task.getTitle().trim().length() == 0) {
-            return new ResponseEntity("missed param: title", HttpStatus.NOT_ACCEPTABLE);
-        }
-
-        taskService.update(task);
-
-        return new ResponseEntity(HttpStatus.OK);
-
+    public void update(@RequestBody TaskRequestDto taskRequestDto) {
+        taskService.update(taskRequestDto);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
-
-        try {
-            taskService.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            e.printStackTrace();
-            return new ResponseEntity("id=" + id + " not found", HttpStatus.NOT_ACCEPTABLE);
-        }
-        return new ResponseEntity(HttpStatus.OK);
+    public void delete(@PathVariable Long id) {
+        taskService.deleteById(id);
     }
 
     @GetMapping("/id/{id}")
     public ResponseEntity<Task> findById(@PathVariable Long id) {
-        Task task = null;
-        try {
-            task = taskService.findById(id);
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-            return new ResponseEntity("id=" + id + " not found", HttpStatus.NOT_ACCEPTABLE);
-        }
-
+        Task task = taskService.findById(id);
         return ResponseEntity.ok(task);
     }
 
@@ -104,7 +64,6 @@ public class TaskController {
         Integer pageNumber = taskRequestDto.getPageNumber() != null ? taskRequestDto.getPageNumber() : null;
         Integer pageSize = taskRequestDto.getPageSize() != null ? taskRequestDto.getPageSize() : null;
 
-
         Sort.Direction direction = sortDirection == null || sortDirection.trim().length() == 0 || sortDirection.trim().equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
 
         Sort sort = Sort.by(direction, sortColumn);
@@ -113,8 +72,6 @@ public class TaskController {
 
         Page result = taskService.findByParams(text, completed, priorityId, categoryId, pageRequest);
 
-
         return ResponseEntity.ok(result);
-
     }
 }

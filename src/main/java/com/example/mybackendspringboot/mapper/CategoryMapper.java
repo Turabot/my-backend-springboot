@@ -5,7 +5,7 @@ import com.example.mybackendspringboot.entity.Category;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CategoryMapper implements Mapper<CategoryDto, Category>{
+public class CategoryMapper implements Mapper<CategoryDto, Category> {
 
     @Override
     public Category mapFrom(CategoryDto object) {

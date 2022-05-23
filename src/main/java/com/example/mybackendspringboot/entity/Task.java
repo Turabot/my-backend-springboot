@@ -1,4 +1,5 @@
 package com.example.mybackendspringboot.entity;
+
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,51 +12,24 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode
 public class Task {
-    private Long id;
-    private String title;
-    private Integer completed;
-    private Date date;
-    private Priority priority;
-    private Category category;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public Long getId() {
-        return id;
-    }
-
-
+    private Long id;
     @Basic
     @Column(name = "title")
-    public String getTitle() {
-        return title;
-    }
-
-
+    private String title;
     @Basic
     @Column(name = "completed")
-    public Integer getCompleted() {
-        return completed;
-    }
-
-
+    private Integer completed;
     @Basic
     @Column(name = "date")
-    public Date getDate() {
-        return date;
-    }
-
-
+    private Date date;
     @ManyToOne
     @JoinColumn(name = "priority_id", referencedColumnName = "id")
-    public Priority getPriority() {
-        return priority;
-    }
-
+    private Priority priority;
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    public Category getCategory() {
-        return category;
-    }
+    private Category category;
 }

@@ -1,6 +1,7 @@
 package com.example.mybackendspringboot.service.db;
 
 import com.example.mybackendspringboot.entity.Category;
+import com.example.mybackendspringboot.exception.CategoryNotFoundException;
 import com.example.mybackendspringboot.repo.CategoryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class CategoryDb {
 
     @Transactional(readOnly = true)
     public Category findById(Long id) {
-        return categoryRepository.findById(id).get();
+        return categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
     }
 
     @Transactional
@@ -33,12 +34,12 @@ public class CategoryDb {
 
     @Transactional(readOnly = true)
     public List<Category> findByTitle(String title) {
-       return categoryRepository.findByTitle(title);
+        return categoryRepository.findByTitle(title);
     }
 
     @Transactional
     public void updateCategory(Long id, String title) {
-        Category category = categoryRepository.findById(id).get();
+        Category category = categoryRepository.findById(id).orElseThrow(CategoryNotFoundException::new);
         category.setTitle(title);
     }
 
