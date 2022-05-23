@@ -10,6 +10,7 @@ public class CategoryMapper implements Mapper<CategoryDto, Category>{
     @Override
     public Category mapFrom(CategoryDto object) {
         return Category.builder()
+                .id(object.getId())
                 .title(object.getTitle())
                 .build();
     }

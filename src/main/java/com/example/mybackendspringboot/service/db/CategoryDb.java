@@ -37,10 +37,9 @@ public class CategoryDb {
     }
 
     @Transactional
-    public Category updateCategory(Long id, String title) {
+    public void updateCategory(Long id, String title) {
         Category category = categoryRepository.findById(id).get();
         category.setTitle(title);
-        return category;
     }
 
     @Transactional

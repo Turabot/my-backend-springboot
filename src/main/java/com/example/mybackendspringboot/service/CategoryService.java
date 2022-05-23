@@ -36,6 +36,10 @@ public class CategoryService {
         return categoryDb.findByTitle(title);
     }
 
+    public void updateCategory(CategoryDto categoryDto) {
+        categoryDb.updateCategory(categoryDto.getId(), categoryDto.getTitle());
+    }
+
     public void deleteCategory(Long id) {
         categoryDb.deleteCategoryById(id);
     }

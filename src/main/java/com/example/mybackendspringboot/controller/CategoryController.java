@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/category")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -38,11 +39,11 @@ public class CategoryController {
     public ResponseEntity<List<Category>> search(@RequestBody CategoryDto categoryDto) {
         return ResponseEntity.ok(categoryService.searchCategory(categoryDto.getTitle()));
     }
-//
-//    @PutMapping("/update")
-//    public void update() {
-//        categoryService.
-//    }
+
+    @PutMapping("/update")
+    public void update(@RequestBody CategoryDto categoryDto) {
+        categoryService.updateCategory(categoryDto);
+    }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

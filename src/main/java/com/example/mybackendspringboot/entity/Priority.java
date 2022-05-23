@@ -1,40 +1,21 @@
 package com.example.mybackendspringboot.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class Priority {
-    private Long id;
-    private String title;
-    private String color;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public Long getId() {
-        return id;
-    }
-
+    private Long id;
     @Basic
     @Column(name = "title")
-    public String getTitle() {
-        return title;
-    }
-
-
+    private String title;
     @Basic
     @Column(name = "color")
-    public String getColor() {
-        return color;
-    }
-
+    private String color;
 }
