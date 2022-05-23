@@ -1,50 +1,27 @@
 package com.example.mybackendspringboot.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@EqualsAndHashCode
+@Data
 @NoArgsConstructor
-@Setter
-@Getter
+@AllArgsConstructor
+@Builder
 public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
     private String title;
-    private Long completedCount;
-    private Long uncompletedCount;
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
-    public Long getId() {
-        return id;
-    }
-
-
-    @Basic
-    @Column(name = "title")
-    public String getTitle() {
-        return title;
-    }
-
 
     @Basic
     @Column(name = "completed_count")
-    public Long getCompletedCount() {
-        return completedCount;
-    }
-
+    private Long completedCount;
 
     @Basic
     @Column(name = "uncompleted_count")
-    public Long getUncompletedCount() {
-        return uncompletedCount;
-    }
-
+    private Long uncompletedCount;
 
 }
